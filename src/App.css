@@ -1,0 +1,21 @@
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    background-color: "#111113";
+    overscroll-behavior-y: none;
+    overscroll-behavior-x: none;
+}
+
+@font-face {
+    font-family: "Ranyth";
+    src: url("./assets/fonts/Ranyth.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "Basically";
+    src: url("./assets/fonts/BasicallyASansSerif-Regular.ttf")
+        format("truetype");
+}
