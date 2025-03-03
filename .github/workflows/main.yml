@@ -23,6 +23,7 @@ jobs:
       - name: Install macOS dependencies
         run: |
           rustup target add aarch64-apple-darwin
+          rustup target add x86_64-apple-darwin
           
       - name: Install dependencies
         run: |
@@ -35,12 +36,14 @@ jobs:
           echo "TAG_DATE=$(date +'%m-%d-%y-%H%M%S')" >> $GITHUB_ENV
           
       - name: Build Tauri app
+        env:
+          MACOSX_DEPLOYMENT_TARGET: "10.13"
         run: |
-          RUST_TARGET=aarch64-apple-darwin bun run tauri build
+          TAURI_TARGETS="universal-apple-darwin" bun run tauri build
           
       - name: Rename DMG file
         run: |
-          cd src-tauri/target/release/bundle/dmg
+          cd src-tauri/target/universal-apple-darwin/release/bundle/dmg
           for f in *.dmg; do
             mv "$f" "${f// /_}"
           done
@@ -55,4 +58,4 @@ jobs:
           name: ${{ env.RELEASE_DATE }}
           draft: false
           prerelease: false
-          files: src-tauri/target/release/bundle/dmg/*.dmg
+          files: src-tauri/target/universal-apple-darwin/release/bundle/dmg/*.dmg
