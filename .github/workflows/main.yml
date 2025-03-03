@@ -3,7 +3,7 @@ name: Build and Release Tauri App
 on:
   push:
     branches:
-      - main  # or your default branch
+      - main
 
 jobs:
   build-and-release:
@@ -12,17 +12,17 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v1
         with:
-          node-version: '20'
+          bun-version: latest
           
       - name: Install Rust
         uses: dtolnay/rust-toolchain@stable
         
       - name: Install dependencies
         run: |
-          npm install
+          bun install
           
       - name: Generate release date
         id: date
@@ -31,7 +31,7 @@ jobs:
           echo "TAG_DATE=$(date +'%m-%d-%y-%H%M%S')" >> $GITHUB_ENV
           
       - name: Build Tauri app
-        run: npm run tauri build
+        run: bun run tauri build
         
       - name: Create Release
         id: create_release
