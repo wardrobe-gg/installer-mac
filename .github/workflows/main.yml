@@ -44,20 +44,13 @@ jobs:
       - name: Build Tauri app
         run: bun run tauri build
 
-      - name: Find app name
-        id: app_name
-        run: |
-          APP_NAME=$(ls src-tauri/target/release/bundle/macos/*.app | head -n 1 | xargs basename)
-          echo "APP_NAME=$APP_NAME" >> "$GITHUB_ENV"
-          echo "Found app: $APP_NAME"
-
       - name: Run xattr on app
         working-directory: src-tauri/target/release/bundle/macos
         run: xattr -cr "Wardrobe Installer.app"
           
       - name: Package .app bundle
         working-directory: src-tauri/target/release/bundle/macos
-        run: zip -r Installer-aarch64.zip "${{ env.APP_NAME }}"
+        run: zip -r Installer-aarch64.zip "Wardrobe Installer.app"
           
       - name: Create Release
         uses: softprops/action-gh-release@v1
