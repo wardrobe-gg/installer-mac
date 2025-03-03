@@ -45,6 +45,10 @@ jobs:
       - name: Build Tauri app
         run: |
           bun run tauri build
+
+      - name: Run xattr on app
+        run: |
+          xattr -c *.app 
           
       - name: Package .app bundle
         run: |
