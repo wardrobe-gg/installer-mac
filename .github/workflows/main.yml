@@ -53,7 +53,7 @@ jobs:
 
       - name: Run xattr on app
         working-directory: src-tauri/target/release/bundle/macos
-        run: xattr -cr "${{ env.APP_NAME }}"
+        run: xattr -cr "Wardrobe Installer.app"
           
       - name: Package .app bundle
         working-directory: src-tauri/target/release/bundle/macos
