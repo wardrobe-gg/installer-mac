@@ -5,9 +5,6 @@
 **Install Wardrobe on a Mac.**
 A pleasant to use installer for the wardrobe.gg cosmetic service.
 
-**
-
-
 ## Installation
 
 ~~To install wardrobe using this program, download the latest release.~~
