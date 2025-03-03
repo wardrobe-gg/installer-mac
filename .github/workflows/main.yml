@@ -44,4 +44,5 @@ jobs:
           draft: false
           prerelease: false
           files: |
+            src-tauri/target/release/bundle/dmg/*.dmg
             src-tauri/target/release/bundle/macos/*.app
