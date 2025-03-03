@@ -46,13 +46,11 @@ jobs:
         run: |
           bun run tauri build
           
-      - name: Rename DMG file
+      - name: Package .app bundle
         run: |
-          cd src-tauri/target/release/bundle/dmg
-          for f in *.dmg; do
-            mv "$f" "${f// /_}"
-          done
-        
+          cd src-tauri/target/release/bundle/macos
+          zip -r Installer-aarch64.zip *.app
+          
       - name: Create Release
         id: create_release
         uses: softprops/action-gh-release@v1
@@ -63,4 +61,4 @@ jobs:
           name: ${{ env.RELEASE_DATE }}
           draft: false
           prerelease: false
-          files: src-tauri/target/release/bundle/dmg/*.dmg
+          files: src-tauri/target/release/bundle/macos/Installer-aarch64.zip
